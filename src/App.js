@@ -1,45 +1,27 @@
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
+import WorkersList from "./WorkersList";
 
 function Home() {
   return (
-    <div style={{ padding: 40 }}>
-      <h1>Benvenuto su RistoMatch</h1>
-      <p>Trova lavoro nella ristorazione o personale stagionale.</p>
-      <div style={{ marginTop: 20 }}>
-        <Link to="/register">Registrati</Link> | <Link to="/login">Login</Link>
+    <div style={{ padding: "60px 20px", textAlign: "center", background: "#fff" }}>
+      <h1 style={{ fontSize: "2.5rem", marginBottom: 10 }}>Benvenuto su RistoMatch</h1>
+      <p style={{ maxWidth: 500, margin: "0 auto 30px", color: "#555" }}>
+        Trova lavoratori stagionali o candidati per ristoranti e locali in pochi clic.
+      </p>
+      <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
+        <Link to="/company/workers">
+          <button style={{ padding: "12px 24px", background: "#0070f3", color: "#fff", border: "none", borderRadius: 5 }}>
+            Ristoratore
+          </button>
+        </Link>
+        <Link to="/company/workers-bloccato">
+          <button style={{ padding: "12px 24px", background: "#666", color: "#fff", border: "none", borderRadius: 5 }}>
+            Simula accesso bloccato
+          </button>
+        </Link>
       </div>
-    </div>
-  );
-}
-
-function Register() {
-  return <div style={{ padding: 40 }}><h2>Registrazione</h2><p>In arrivo...</p></div>;
-}
-
-function Login() {
-  return <div style={{ padding: 40 }}><h2>Login</h2><p>In arrivo...</p></div>;
-}
-
-function WorkersList({ isPremium }) {
-  if (!isPremium) {
-    return (
-      <div style={{ padding: 40 }}>
-        <h2>Lavoratori disponibili</h2>
-        <p>Attiva l'accesso stagionale per visualizzare i profili.</p>
-      </div>
-    );
-  }
-
-  return (
-    <div style={{ padding: 40 }}>
-      <h2>Lavoratori disponibili</h2>
-      <ul>
-        <li>Mario R. - Cameriere</li>
-        <li>Giulia S. - Cuoca</li>
-        <li>Antonio B. - Lavapiatti</li>
-      </ul>
     </div>
   );
 }
@@ -49,8 +31,6 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/company/workers" element={<WorkersList isPremium={true} />} />
         <Route path="/company/workers-bloccato" element={<WorkersList isPremium={false} />} />
         <Route path="*" element={<Navigate to="/" replace />} />
